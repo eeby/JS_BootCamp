@@ -2,46 +2,85 @@
  * Created by elibe on 09/02/2016.
  */
 
-var fs                  = require("fs");
-var readlineSync        = require('readline-sync');
-var Table               = require('cli-table');
-var groups              = [];
-var persons             = [];
-var currentGroup        = null;
-var nextID              = 0;
-var table               = new Table();
-var tableFind           = new Table();
-var tblPrintAll         = new Table();
+var fs                              = require("fs");
+var readlineSync                    = require('readline-sync');
 
+var Table                           = require('cli-table');
+var tableMenu                       = new Table();
+var tableShowElems                  = new Table();
 
+var groups                          = [];
+var persons                         = [];
 
-var MENU_ADD_PERSON             = 1;
-var MENU_ADD_GROUP              = 2;
-var MENU_CHANGE_GROUP           = 3;
-var MENU_PRINT_CURRENT_GROUP    = 4;
-var MENU_PRINT_ALL              = 5;
-var MENU_FIND_ELEMENT           = 6;
-var MENU_DELETE                 = 7;
-var MENU_CREATE_FILE            = 8;
-var MENU_READ_FILE              = 9;
-var MENU_EXIT                   = 10;
+var currentGroup                    = null;
+var nextID                          = 0;
+var foundString                     = false;
 
-var CASE_PERSON = 1;
-var CASE_GROUP  = 2;
+var MENU_ADD_PERSON                 = 1;
+var MENU_ADD_GROUP                  = 2;
+var MENU_CHANGE_GROUP               = 3;
+var MENU_PRINT_CURRENT_GROUP        = 4;
+var MENU_PRINT_ALL                  = 5;
+var MENU_FIND_ELEMENT               = 6;
+var MENU_DELETE                     = 7;
+var MENU_CREATE_FILE                = 8;
+var MENU_READ_FILE                  = 9;
+var MENU_EXIT                       = 10;
+
+var MENU_ITEM_ADD_PERSON            = "Add New Person";
+var MENU_ITEM_ADD_GROUP             = "Add New Group";
+var MENU_ITEM_CHANGE_GROUP          = "Change Current Group";
+var MENU_ITEM_PRINT_CURRENT_GROUP   = "Print Current Group";
+var MENU_ITEM_PRINT_ALL_ELEMENTS    = "Print All Element";
+var MENU_ITEM_FIND_ELEMENT          = "Find Element";
+var MENU_ITEM_DELETE_ELEMENT        = "Delete Element";
+var MENU_ITEM_CREATE_FILE           = "Create IO File";
+var MENU_ITEM_READ_FILE             = "Read IO File";
+var MENU_ITEM_EXIT                  = "EXIT";
+
+var CAPTION_ID                  = "ID";
+var CAPTION_GROUP_NAME          = "Group Name";
+var CAPTION_FIRST_NAME          = "First Name";
+var CAPTION_LAST_NAME           = "Last Name";
+var CAPTION_PHONES              = "Phones";
+
+var PARAM_PERSON                = 1;
+var PARAM_GROUP                 = 2;
+var PARAM__NAME                 = "name";
+var PARAM_FIRST_NAME            = "firstName";
+var PARAM_LAST_NAME             = "lastName";
+
+var QUESTION_FIRST_NAME         = "Enter First Name: ";
+var QUESTION_LAST_NAME          = "Enter Last Name: ";
+var QUESTION_PHONE              = "Enter Phone Number: ";
+var QUESTION_ANOTHER_PHONE      = "Do you want to enter another phone number? \nPress Y for yes or N for not: ";
+var QUESTION_GROUP_NAME         = "Enter Group Name: ";
+var QUESTION_SAVE_CHANGES       = "Do you want to save your changes? \nPress Y for yes or N for not: " ;
+var QUESTION_PRESS_TO_CONTINUE  = "\n\nPress any key to continue! " ;
+var QUESTION_ID_TO_DELETE       = "Please enter the ID to delete? " ;
+var QUESTION_STRING_TO_FIND     = "Please enter the string you are looking? " ;
+var QUESTION_STRING_NOT_FOUND   = "There is no Group or Person named: ";
+
+var MESSAGE_IO_SUCCESS          = "Data written successfully!";
+var MESSAGE_GOOD_BYE            = "Good Bye!";
+var MESSAGE_FALSE_NAME          = "Group name doesn't exists under current group!";
+var MESSAGE_IO_SUCCESS          = "Data written successfully!";
+
+var ROOT_GROUP                  = "root";
 
 (function createGUI(){
     addRoot();
 
-    table.push(["1.",   "Add New Person"]);
-    table.push(["2.",   "Add New Group"]);
-    table.push(["3.",   "Change Current Group"]);
-    table.push(["4.",   "Print Current Group"]);
-    table.push(["5.",   "Print All Element"]);
-    table.push(["6.",   "Find Element"]);
-    table.push(["7.",   "Delete Element"]);
-    table.push(["8.",   "Create IO File"]);
-    table.push(["9.",   "Read IO File"]);
-    table.push(["10.",  "Exit"]);
+    tableMenu.push(["1.",   MENU_ITEM_ADD_PERSON]);
+    tableMenu.push(["2.",   MENU_ITEM_ADD_GROUP]);
+    tableMenu.push(["3.",   MENU_ITEM_CHANGE_GROUP]);
+    tableMenu.push(["4.",   MENU_ITEM_PRINT_CURRENT_GROUP]);
+    tableMenu.push(["5.",   MENU_ITEM_PRINT_ALL_ELEMENTS]);
+    tableMenu.push(["6.",   MENU_ITEM_FIND_ELEMENT]);
+    tableMenu.push(["7.",   MENU_ITEM_DELETE_ELEMENT]);
+    tableMenu.push(["8.",   MENU_ITEM_CREATE_FILE]);
+    tableMenu.push(["9.",   MENU_ITEM_READ_FILE]);
+    tableMenu.push(["10.",  MENU_ITEM_EXIT]);
 
     // read file name PhoneBook.txt if exists
     readIOFile();
@@ -61,21 +100,23 @@ function runAction(action){
             enterGroupNameTOChange();
             break;
         case MENU_PRINT_CURRENT_GROUP:
-            tblPrintAll = new Table();
+            setTableHeader();
             printCurrentGroup();
-            console.log(tblPrintAll.toString());
+            console.log(tableShowElems.toString());
             break;
         case MENU_PRINT_ALL:
-            tblPrintAll = new Table();
+            setTableHeader();
             printAllElem(groups[0]);
-            console.log(tblPrintAll.toString());
+            console.log(tableShowElems.toString());
             break;
         case MENU_FIND_ELEMENT:
             findElem();
             break;
         case MENU_DELETE:
+            setTableHeader();
+            printAllElem(groups[0]);
+            console.log(tableShowElems.toString());
             enterItemToDelete();
-            tblPrintAll = new Table();
             break;
         case MENU_CREATE_FILE:
             createIOFile();
@@ -91,7 +132,7 @@ function runAction(action){
     }
 
     if(isRun){
-        readlineSync.question('Press any key to continue! ');
+        readlineSync.question(QUESTION_PRESS_TO_CONTINUE);
         drawTable();
     }
     else
@@ -101,73 +142,73 @@ function runAction(action){
 }
 
 function endProg(){
-    var saveOrNot = readlineSync.question('Do you want to save your changes? \nPress Y to save or N not to save:   ');
+    var saveOrNot = readlineSync.question(QUESTION_SAVE_CHANGES);
     if(saveOrNot.toUpperCase() == "Y") {
         createIOFile();
     }
-    console.log("See You Later");
+    console.log(MESSAGE_GOOD_BYE);
+}
+
+function checkStringNotEmpty(question){
+    var param;
+    do{
+        param = readlineSync.question(question);
+    }
+    while (param == "");
+
+    return param;
 }
 
 function createPerson() {
-    var firstName   = readlineSync.question('First name? ');
-    var lastName    = readlineSync.question('Last name? ');
-    var phone       = readlineSync.question('Phone number? ');
+    var phoneArr    = [];
+    var firstName   = checkStringNotEmpty(QUESTION_FIRST_NAME);
+    var lastName    = checkStringNotEmpty(QUESTION_LAST_NAME);
 
-    addPerson(firstName, lastName, phone);
+    do{
+        phoneArr.push(checkStringNotEmpty(QUESTION_PHONE));
+    }
+    while (readlineSync.question(QUESTION_ANOTHER_PHONE).toUpperCase() == "Y");
+
+    addPerson(firstName, lastName, phoneArr);
 }
 
 function createGroup(){
-    var name = readlineSync.question('Group name? ');
+    var name = checkStringNotEmpty(QUESTION_GROUP_NAME);
+
     addGroup(name);
 }
 
 function enterGroupNameTOChange(){
-    var name = readlineSync.question('Group name? ');
+
+    var name = readlineSync.question(QUESTION_GROUP_NAME);
     changeCurrentGroup(name);
 }
 
-function deletePersons(){
-    for(var i=0; i<persons.length; i++){
-        tblShowElems.push([persons[i].ID, persons[i].firstName, persons[i].lastName]);
-    }
-    console.log(tblShowElems.toString());
-    delPersonItem(readlineSync.question('Please enter the person ID? '));
+function deletePersons(itemToDelete){
+    delPersonItem(itemToDelete);
 }
 
-function deleteGroup(){
-    for(var y=1; y<groups.length; y++){
-        tblShowElems.push([groups[y].ID, groups[y].name]);
-    }
-    console.log(tblShowElems.toString());
-    delGroupItem(readlineSync.question('Please enter the group ID? '));
+function deleteGroup(itemToDelete){
+    delGroupItem(itemToDelete);
     currentGroup = groups[0];
 }
 
+function setTableHeader(){
+    tableShowElems = new Table();
+    tableShowElems.push([CAPTION_ID, CAPTION_GROUP_NAME, CAPTION_FIRST_NAME, CAPTION_LAST_NAME, CAPTION_PHONES]);
+}
+
 function enterItemToDelete(){
-    var typeElme = readlineSync.question('Press 1 to delete a Person or 2 to delete a Group: ');
-    tblShowElems = new Table();
-    tblShowElems.push(["ID", "Name"]);
-    switch (+typeElme){
-        case CASE_PERSON:
-            deletePersons();
-            break;
-        case CASE_GROUP:
-            deleteGroup();
-            break;
+    var itemToDelete = readlineSync.question(QUESTION_ID_TO_DELETE);
+    if(!deleteGroup(itemToDelete)){
+        deletePersons(itemToDelete);
     }
 }
 
 function findElem(){
-    var typeElme = readlineSync.question('Press 1 to find a Person or 2 to find a Group: ');
-    tableFind = new Table();
-    switch (+typeElme){
-        case CASE_PERSON:
-            findPersonByName(readlineSync.question('Please enter the persons name? '));
-            break;
-        case CASE_GROUP:
-            findGroupByName(readlineSync.question('Please enter the groups name? '));
-            break;
-    }
+    setTableHeader();
+    var stringToFind = readlineSync.question(QUESTION_STRING_TO_FIND);
+    findByName(stringToFind);
 }
 
 function addPerson(firstName, lastName, phone){
@@ -195,7 +236,7 @@ function addGroup(groupName){
 function addRoot(){
     var root = {
         ID: -1,
-        name: "root",
+        name: ROOT_GROUP,
         parentID: null
     };
 
@@ -211,13 +252,14 @@ function changeCurrentGroup(groupName){
     if(groupName != ".."){
         var groupNameExists = false;
         for(var i=0; i<groups.length; i++){
-            if(groups[i].name.toUpperCase() == groupName.toUpperCase()){
+            if(groups[i].name.toUpperCase() == groupName.toUpperCase() && currentGroup.ID == groups[i].parentID){
                 currentGroup = groups[i];
                 groupNameExists = true;
+                break;
             }
         }
         if(groupNameExists == false){
-            console.log("False group name!");
+            console.log(MESSAGE_FALSE_NAME);
         }
     }
     else{
@@ -248,23 +290,27 @@ function printCurrentGroup(){
     }
 }
 
-function printPersons(groupID){
-    if(persons) {
-        for (var y = 0; y < persons.length; y++) {
-            if (persons[y].groupID == groupID) {
-                tblPrintAll.push(["", persons[y].firstName, persons[y].lastName, persons[y].phone ]);
-                //console.log("  Person: Name:" + persons[y].firstName + " Last Name: " + persons[y].lastName + " Phone: " + persons[y].phone);
-            }
+function printPersonsByGroupID(groupID) {
+    for (var y = 0; y < persons.length; y++) {
+        if (persons[y].groupID == groupID) {
+            printPerson(persons[y]);
         }
     }
 }
 
-function printAllElem(obj) {
-    if (obj.ID != -1) {
-        tblPrintAll.push([obj.name]);
-    }
+function printPerson(person){
+    tableShowElems.push([person.ID, "", person.firstName, person.lastName, person.phone.toString()]);
+}
 
-    printPersons(obj.ID);
+function printGroup(group) {
+    if (group.ID != -1) {
+        tableShowElems.push([group.ID ,group.name]);
+    }
+}
+
+function printAllElem(obj) {
+    printGroup(obj);
+    printPersonsByGroupID(obj.ID);
 
     for (var i = 0; i < groups.length; i++) {
         if (groups[i].parentID == obj.ID) {
@@ -273,39 +319,38 @@ function printAllElem(obj) {
     }
 }
 
-function findPersonByName(strName) {
-    var exists = false;
-
-    for (var i = 0; i < persons.length; i++) {
-        if (persons[i].firstName.toUpperCase() == strName.toUpperCase() || persons[i].lastName.toUpperCase() == strName.toUpperCase() || persons[i].phone == strName) {
-            printTable(persons[i]);
-            //console.log("Name:" + persons[i].firstName + " Last Name: " + persons[i].lastName + " Phone: " + persons[i].phone);
-            exists = true;
-            break;
-        }
+function findByName(stringToFind) {
+    foundString = false;
+    for(var i=0; i<groups.length; i++){
+        checkString(stringToFind, groups[i], PARAM_GROUP);
     }
-
-    if(exists == false){
-        console.log("Group Name not exists!")
+    for (var i = 0; i < persons.length; i++) {
+        checkString(stringToFind, persons[i], PARAM_PERSON);
+    }
+    if(foundString){
+        console.log(tableShowElems.toString());
+    }
+    else{
+        console.log(QUESTION_STRING_NOT_FOUND + stringToFind);
     }
 }
 
-function findGroupByName(strName){
-    var exists = false;
+function checkString(stringToFind, object, paramType){
+    var keys = Object.keys(object);
 
-    for(var i=0; i<groups.length; i++){
-        if(groups[i].name.toUpperCase() == strName.toUpperCase()){
-            printTable(groups[i]);
-            //console.log("Group Name:" + groups[i].name);
-            exists = true;
-            break;
+    for(var i=0; i<keys.length; i++){
+        if(keys[i] == PARAM__NAME || keys[i] == PARAM_FIRST_NAME || keys[i] == PARAM_LAST_NAME) {
+            if (object[keys[i]].toLowerCase() == stringToFind.toLowerCase()) {
+                foundString = true;
+                if (paramType == 1) {
+                    printPerson(object);
+                }
+                else {
+                    printGroup(object);
+                }
+            }
         }
     }
-
-    if(exists == false){
-        console.log("Group Name not exists!")
-    }
-
 }
 
 function delPersonItem(ID){
@@ -347,33 +392,15 @@ function delGroupItem(groupID) {
     for (var i = 0; i < groups.length; i++) {
         if (groups[i].ID == groupID){
             groups.splice(i, 1);
+            return true;
         }
     }
 }
 
-function printTable(obj){
-    var keys = Object.keys(obj);
-    tableFind.push(keys);
-    tableFind.push(pushToArr(keys, obj));
-    console.log(tableFind.toString());
-}
-
-function pushToArr(keys, obj){
-    var arrVal = [];
-    for(var i=0; i<keys.length; i++){
-        arrVal.push(obj[keys[i]]);
-    }
-    return arrVal;
-}
-
 function drawTable(){
-    console.log(table.toString());
+    console.log(tableMenu.toString());
     var actionSelected = readlineSync.question("\n" + currentGroup.name + " > ");
     runAction(actionSelected);
-}
-
-function getGroupName(){
-
 }
 
 function createIOFile() {
@@ -386,7 +413,7 @@ function createIOFile() {
         if (err) {
             return console.error(err);
         }
-        console.log("Data written successfully!");
+        console.log(MESSAGE_IO_SUCCESS);
     });
 }
 
