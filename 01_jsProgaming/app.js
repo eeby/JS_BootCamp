@@ -4,8 +4,8 @@
 
 var fs                              = require("fs");
 var readlineSync                    = require('readline-sync');
-
 var Table                           = require('cli-table');
+
 var tableMenu                       = new Table();
 var tableShowElems                  = new Table();
 
