@@ -163,9 +163,13 @@ function deleteItem(){
 function findItemAndDelete(cGroup, ID) {
     cGroup.items.forEach(function (item, index) {
         if(item.id == ID) {
+
             cGroup.items.splice(index, 1);
             currentGroup = root;
             return;
+        }
+        else if(item.type == "Group"){
+            findItemAndDelete(item, ID)
         }
     });
 }
