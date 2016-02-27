@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+
+        var obj = {
+            id:1,
+            name: "eli",
+            items: ''
+        }
+
+        (function() {
+            obj.items = obj;
+            var str = JSON.stringify(obj);
+        }());
+
+    </script>
+</body>
+</html>
