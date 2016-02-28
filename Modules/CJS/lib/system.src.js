@@ -4098,7 +4098,7 @@ hookConstructor(function(constructor) {
           }
 
           if (!load.metadata.entry && !load.metadata.bundle)
-            throw new TypeError('AMD module ' + load.name + ' did not define');
+            throw new TypeError('AMD (requireJS) ' + load.name + ' did not define');
         }
         else {
           load.metadata.execute = function() {
