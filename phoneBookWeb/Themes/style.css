@@ -1,0 +1,249 @@
+body, div, span {
+    font-family: Arial;
+    font-size: 12px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.btn, input[type=button] {
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.clear {
+    clear: both;
+}
+
+.marginBottom20 {
+    margin-bottom: 20px;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+.marginBottom5 {
+    margin-bottom: 5px;
+}
+
+#wrp {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+#wrp .container {
+    position: relative;
+    width: 96%;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-shadow: 0px 0px 24px 6px gray;
+    box-sizing: border-box;
+    height: 580px;
+}
+
+#wrp #phoneBookWrp {
+    position: relative;
+    margin: 10px auto
+}
+
+#wrp #headerWrp {
+    position: relative;
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid #EFE9E9;
+}
+
+#wrp #headerWrp .title {
+    position: absolute;
+    top: 12px;
+    left: 60px;
+}
+
+#wrp #footerWrp {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #EFE9E9;
+}
+
+#wrp #footerWrp .title {
+    position: absolute;
+    top: 8px;
+    left: 60px;
+}
+
+#wrp #directoryWrp {
+    position: relative;
+    width: 170px;
+    float: left;
+    margin: 25px 60px;
+}
+
+#wrp .subTitle {
+    position: relative;
+}
+
+#wrp #rightWrp {
+    float: left;
+    margin-top: 25px;
+    width: 700px;
+}
+
+#wrp #formWrp {
+    position: relative;
+    width: 100%;
+}
+
+#wrp #formWrp #navBar div {
+    float: left;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+#wrp #formWrp .inputTextWrp {
+    position: relative;
+    width: 100%;
+    height: 30px;
+    border: 1px solid gray;
+}
+
+#wrp #formWrp .inputTextWrp .inputText {
+    float: left;
+    border: 1px;
+    width: 620px;
+    height: 26px;
+    margin-top: 2px;
+    margin-left: 10px;
+    font-size: 16px;
+}
+
+#wrp #formWrp .inputTextWrp .inputText:focus {
+    outline: none;
+}
+
+#wrp #formWrp .inputTextPhonesWrp {
+    position: relative;
+    height: 30px;
+}
+
+#wrp #formWrp .inputTextPhonesWrp .inputText {
+    float: left;
+    width: 124px;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+#wrp #formWrp .inputTextPhonesWrp #btnAddPhones {
+    padding: 7px;
+}
+
+#wrp #formWrp .inputTextWrp #btnSearch {
+    float: right;
+    width: 68px;
+    height: 30px;
+    background: #d9efa3;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px;
+    box-sizing: border-box;
+    border-left: 1px solid gray;
+}
+
+#wrp #sideBar .contactsTable {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+#wrp #sideBar .contactsTable tHead {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#wrp #sideBar .contactsTable td {
+    border-bottom: 1px solid gray;
+    height: 30px;
+    width: 33%;
+}
+
+#wrp [name="displayPanel"] div {
+    margin: 4px 0px;
+}
+
+#wrp [name="displayPanel"] [type="button"] {
+    width: 60px;
+    height: 30px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+#wrp #directoryTree ul::before {
+    padding-left: 20px;
+}
+
+ul.tree, ul.tree ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.tree ul {
+    margin-left: 20px;
+}
+
+ul.tree li {
+    margin: 0;
+    padding: 0px 7px;
+    line-height: 20px;
+    font-weight: bold;
+    color: #369;
+}
+
+ul.tree li:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+ul.tree li:last-child {
+    border-left: none;
+}
+
+ul.tree li:before {
+    position: relative;
+    width: 12px;
+    color: white;
+    display: inline-block;
+}
+
+ul.tree li.selected, #wrp #formWrp #navBar div.selected {
+    color: red;
+}
+
+ul.tree li span {
+    float: right;
+}
+
+h2 #currentGroup {
+    font-size: 1em;
+}
+
+#foundWrp #alertWrp {
+    font-size: 16px;
+    color: red;
+    font-weight: bold;
+}
+
+
