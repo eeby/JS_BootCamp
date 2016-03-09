@@ -1,93 +1,116 @@
-var puzzle = puzzle || {};
-puzzle.mouseEvent = (function() {
+"use strict"
 
+var puzzle = puzzle || {};
+puzzle.mouseEvent = (function () {
+
+    var board = $('#boardWrp');
+    var floater = $('#floater');
     var overItem = {};
     var selectedItem = {};
 
-    function mouseDown(obj, event) {
-        var mousePos = mouseCoords(event);
+    floater.bind('mousemove', function () {
+        mouseMove(event);
+    });
+    floater.bind('click', function () {
+        mouseClick(this);
+    });
 
-        updateItem(selectedItem, obj);
-
-        $('#' + obj.id).attr('drag', 'drag');
-        $('#container').show();
-        $('#container').attr('src', obj.src);
-        $('#container').attr('name', obj.name);
-        $('#container').css({top: mousePos.y, left: mousePos.x});
+    return {
+        mouseDown: mouseDown,
     }
 
-    function touchMove(event){
-        var ev = event;
+    function mouseDown(obj, event) {
+        var mousePos = getMouseCoords(event);
+
+        bindWithMouseEvents();
+
+        updateItemWithNameAndSource(selectedItem, obj);
+
+        updateFloater(obj, mousePos);
+
+        function updateFloater(obj, mousePos) {
+            floater.show();
+            floater.attr('src', obj.src);
+            floater.attr('name', obj.name);
+            floater.css({top: mousePos.y, left: mousePos.x});
+        }
+
+        function bindWithMouseEvents() {
+            board.children().each(function () {
+                $(this).bind('mouseover', function () {
+                    mouseOver(this);
+                });
+            });
+        }
     }
 
     function mouseMove(event) {
-        var mousePos = mouseCoords(event);
-        var pX = event.pageX;
-        var pY = event.pageY;
+        var mousePos = getMouseCoords(event);
 
-        $('#container').css({top: mousePos.y, left: mousePos.x});
+        floater.css({top: mousePos.y, left: mousePos.x});
     }
 
-    function mouseOver(obj){
-        updateItem(overItem, obj);
-        $('#puzzleWrp img[drag]').each(function(){
-            $(this).removeAttr('drag');
+    function mouseOver(obj) {
+
+        updateItemWithNameAndSource(overItem, obj);
+
+        replacePuzzelElements();
+
+        unbindWithMouseEvents();
+
+        function replacePuzzelElements() {
             $('#' + selectedItem.id).attr('src', $('#' + overItem.id).attr('src'));
             $('#' + selectedItem.id).attr('name', $('#' + overItem.id).attr('name'));
-            $('#' + overItem.id).attr('src', $('#container').attr('src'));
-            $('#' + overItem.id).attr('name', $('#container').attr('name'));
-            $('#container').attr('src', '');
+            $('#' + overItem.id).attr('src', floater.attr('src'));
+            $('#' + overItem.id).attr('name', floater.attr('name'));
 
-            checkPuzzle();
-        })
+            clearFloater();
+
+            function clearFloater() {
+                floater.attr('src', '');
+            }
+        }
+
+        function unbindWithMouseEvents() {
+            board.children().each(function () {
+                $(this).unbind('mouseover');
+            });
+        }
+
+        checkPuzzle();
     }
 
-    function mouseClick(){
-        $('#container').hide();
+    function mouseClick() {
+        floater.hide();
     }
 
-    function checkPuzzle(){
+    function checkPuzzle() {
         var counter = 0;
-        $('#puzzleWrp img').each(function(index){
-            if(this.name == index + 1){
+        board.children().each(function (index) {
+            if (this.name == index + 1) {
                 counter++;
             }
         });
 
-        if(counter == 9){
-            var ret = confirm('Congratulations, you have completed the puzzle successfully! \nPress OK to start over.');
-            if(ret){
-                startOver();
+        if (counter == 9) {
+            var ret = confirm('Congratulations, you have completed the puzzle successfully!' +
+                '\nPress OK to start over.');
+            if (ret) {
+                puzzle.kickstarter.init();
             }
         }
     }
 
-    function updateItem(item, obj){
+    function updateItemWithNameAndSource(item, obj) {
         item.id = obj.id;
         item.name = obj.name;
     }
 
-    function mouseCoords(event) {
-        var pX, pY;
-        if(event.clientX < $('#puzzleWrp').width() && event.clientX > 0) {
-            pX = event.clientX - 50;
-        }
-
-        if(event.clientY < $('#puzzleWrp').height() && event.clientY > 0){
-            pY = event.clientY - 50;
-        }
-
+    function getMouseCoords(event) {
         return {
-            x: pX,
-            y:pY
+            x: event.clientX - 50,
+            y: event.clientY - 50
         };
-    }
-
-    return{
-        mouseDown: mouseDown,
-        mouseOver: mouseOver,
-        mouseMove: mouseMove,
-        mouseClick: mouseClick,
     }
 })();
 

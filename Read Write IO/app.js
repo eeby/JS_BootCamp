@@ -30,8 +30,8 @@ function printMenu() {
     console.log("8) Exit");
 }
 
-function run(){
-    while(true) {
+function run() {
+    while (true) {
         printMenu();
         var command = rl.question("Contact Book> ");
         handleCommand(command);
@@ -44,38 +44,38 @@ function handleCommand(line) {
     if (command == Menu.ADD_NEW_CONTACT) {
         addNewContact();
     }
-    else if(command == Menu.ADD_NEW_GROUP) {
+    else if (command == Menu.ADD_NEW_GROUP) {
         addNewGroup();
     }
-    else if(command == Menu.CHANGE_CURRENT_GROUP) {
+    else if (command == Menu.CHANGE_CURRENT_GROUP) {
         changeCurrentGroup();
     }
-    else if(command == Menu.PRINT) {
+    else if (command == Menu.PRINT) {
         print();
     }
-    else if(command == Menu.PRINT_ALL) {
+    else if (command == Menu.PRINT_ALL) {
         printAll(root);
     }
-    else if(command == Menu.FIND) {
+    else if (command == Menu.FIND) {
         find();
     }
-    else if(command == Menu.DELETE) {
+    else if (command == Menu.DELETE) {
         deleteItem();
     }
-    else if(command == Menu.EXIT) {
+    else if (command == Menu.EXIT) {
         WriteIOFile();
         exit();
     }
 }
 
-function addNewContact(){
+function addNewContact() {
     var firstName = readNonEmptyString("First Name: ");
     var lastName = readNonEmptyString("Last Name: ");
 
     var phoneNumbers = [];
-    while(true){
+    while (true) {
         var phoneNumber = rl.question("Phone Number (press enter when done): ");
-        if(!phoneNumber){
+        if (!phoneNumber) {
             break;
         }
 
@@ -86,17 +86,17 @@ function addNewContact(){
     addItem(contact);
 }
 
-function addNewGroup(){
+function addNewGroup() {
     var name = readNonEmptyString("Name: ");
 
     var group = createGroup(name);
     addItem(group);
 }
 
-function changeCurrentGroup(){
+function changeCurrentGroup() {
     var name = readNonEmptyString("Name: ");
-    if(name == ".."){
-        if(!currentGroup.parent){
+    if (name == "..") {
+        if (!currentGroup.parent) {
             return;
         }
 
@@ -104,12 +104,13 @@ function changeCurrentGroup(){
     }
     else {
         var subGroup = findGroup(root, name);
-        if(!subGroup){
+        if (!subGroup) {
             console.log("Group with name " + name + " was not found")
         }
 
         currentGroup = subGroup;
-    }}
+    }
+}
 
 function print() {
     currentGroup.items.forEach(function (item) {
@@ -138,43 +139,43 @@ function printAll(currentGroup) {
     });
 }
 
-function find(){
+function find() {
     var name = readNonEmptyString("Name: ");
 
     currentGroup.items.forEach(function (item) {
-        if(item.name != name && item.firstName != name){
+        if (item.name != name && item.firstName != name) {
             return;
         }
         if (item.type == "Contact") {
             printContact(item);
         }
-        else{
+        else {
             printGroup(item);
         }
         return;
     });
 }
 
-function deleteItem(){
+function deleteItem() {
     var ID = readNonEmptyString("ID: ");
     findItemAndDelete(root, ID);
 }
 
 function findItemAndDelete(cGroup, ID) {
     cGroup.items.forEach(function (item, index) {
-        if(item.id == ID) {
+        if (item.id == ID) {
 
             cGroup.items.splice(index, 1);
             currentGroup = root;
             return;
         }
-        else if(item.type == "Group"){
+        else if (item.type == "Group") {
             findItemAndDelete(item, ID)
         }
     });
 }
 
-function exit(){
+function exit() {
     process.exit(0);
 }
 
@@ -202,29 +203,6 @@ function pushContact(id, firstName, lastName, phoneNumbers) {
     return contact;
 }
 
-function createGroup(name) {
-    var group = {
-        id: generateNextId(),
-        type: 'Group',
-        name: name,
-        items: [],
-        childrenCount: 0
-    };
-
-    return group;
-}
-
-function pushGroup(id, name, childrenCount) {
-    var group = {
-        id: id,
-        type: 'Group',
-        name: name,
-        items: [],
-        childrenCount: childrenCount
-    };
-
-    return group;
-}
 
 function updateRoot(childrenCount) {
     root.childrenCount = childrenCount;
@@ -232,7 +210,7 @@ function updateRoot(childrenCount) {
 
 
 function addItem(item) {
-    if(item.currentGroup){
+    if (item.currentGroup) {
         throw Error("Item with id " + item.id + " was already added to group: " + item.currentGroup.id);
     }
 
@@ -246,30 +224,30 @@ function pushItem(item) {
     item.parent = currentGroup;
 }
 
-function generateNextId(){
+function generateNextId() {
     return nextId++;
 }
 
-function printGroup(group){
+function printGroup(group) {
     console.log("Group -- ID: " + group.id + " -- Name: " + group.name);
 }
 
-function printContact(contact){
+function printContact(contact) {
     console.log("Contact -- ID: " + contact.id + " -- First Name: " + contact.firstName
-                        + " -- Last Name: " + contact.lastName
-                        + " -- Phones: " + contact.phoneNumbers.toString());
+        + " -- Last Name: " + contact.lastName
+        + " -- Phones: " + contact.phoneNumbers.toString());
 }
 
 function readNonEmptyString(message) {
-    while(true) {
+    while (true) {
         var line = rl.question(message).trim();
-        if(line){
+        if (line) {
             return line;
         }
     }
 }
 
-function findGroup(currentGroup, name){
+function findGroup(currentGroup, name) {
     currentGroup.items.forEach(function (item) {
         if (item.type == "Group" && item.name.toUpperCase() == name.toUpperCase()) {
             currentGroup = item;
@@ -306,7 +284,7 @@ function convertObjectToString(currentGroup) {
     });
 }
 
-function convertGroupToString(item){
+function convertGroupToString(item) {
     objString += '|{';
     objString += '"type": "' + item.type + '",';
     objString += '"id": "' + item.id + '",';
@@ -315,7 +293,7 @@ function convertGroupToString(item){
     objString += '}';
 }
 
-function convertContactToString(item){
+function convertContactToString(item) {
     objString += '|{';
     objString += '"type": "' + item.type + '",';
     objString += '"id": "' + item.id + '",';
@@ -366,13 +344,13 @@ function addGroupsAndContactsToPhoneBook(currentObj, dataArr) {
     }
 }
 
-function addContactToPhoneBook(currentObj){
+function addContactToPhoneBook(currentObj) {
     var phoneNumbers = currentObj.phoneNumbers.split(',');
     var contact = pushContact(currentObj.id, currentObj.firstName, currentObj.lastName, phoneNumbers);
     pushItem(contact);
 }
 
-(function(){
+(function () {
     readIOFile(root);
     run();
 })();

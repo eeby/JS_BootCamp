@@ -1,32 +1,27 @@
-*{
-    font-family: Arial;
-    font-size:12px;
+* {
     margin: 0px;
     padding: 0px;
 }
-#puzzleWrp{
+
+#boardWrp {
     position: relative;
     left: 0px;
     right: 0px;
     height: 100vh;
     min-width: 300px;
     min-height: 260px;
-    border:1px solid gray;
+    border: 1px solid gray;
     box-sizing: border-box;
     display: flex;
     flex-wrap: wrap;
 }
-#puzzleWrp img{
+
+#boardWrp img {
     width: 33%;
 }
-#puzzleWrp .dragImg{
-    position: absolute;
-}
-#container.imgTransparent{
-    opacity: 0.7;
 
-}
-#container{
+#floater {
     position: absolute;
     cursor: move;
+    opacity: 0.7;
 }
