@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="Shape.js"></script>
+    <script src="Rect.js"></script>
+    <script src="Circle.js"></script>
+</head>
+<body>
+    <script>
+        var r = new myApp.Rect(1, 1, 10, 20);
+        var c = new myApp.Circle(2, 2, 5);
+
+
+        r.prototype = Object.create(myApp.Shape.prototype);
+        c.prototype = Object.create(myApp.Shape.prototype);
+
+        r.dump();
+        c.dump();
+
+    </script>
+</body>
+</html>
