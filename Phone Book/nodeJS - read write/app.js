@@ -86,6 +86,30 @@ function addNewContact() {
     addItem(contact);
 }
 
+function createGroup(name) {
+    var group = {
+        id: generateNextId(),
+        type: 'Group',
+        name: name,
+        items: [],
+        childrenCount: 0
+    };
+
+    return group;
+}
+
+function pushGroup(id, name, items) {
+    var group = {
+        id: id,
+        type: 'Group',
+        name: name,
+        items: [],
+        childrenCount: items
+    };
+
+    return group;
+}
+
 function addNewGroup() {
     var name = readNonEmptyString("Name: ");
 
