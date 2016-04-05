@@ -41,10 +41,11 @@ myPhonebook.MenuView = (function () {
      * Search items
      */
     MenuView.prototype.search = function () {
+        event.preventDefault();
         var obj = {
             text: $("#searchText").val(),
         }
-
+        $("#searchText").val('');
         if (dispatcher) {
             dispatcher.emit('SEARCH', obj);
         }

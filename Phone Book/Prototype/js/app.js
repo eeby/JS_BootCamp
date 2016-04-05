@@ -23,9 +23,5 @@ window.onload = function () {
 
         var promptView = new myPhonebook.PromptView(domHelpers.getElement("#myModal"));
 
-        return {
-            dispatcher: dispatcher,
-        }
-
     })();
 }
