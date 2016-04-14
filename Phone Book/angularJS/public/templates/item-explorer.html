@@ -1,0 +1,25 @@
+<div id="directoryTree" name="panelWrp">
+    <div>
+        <img src="./images/go_b.png" class="backBtn" ng-if="ctrl.currentGroup.id != -1" ng-click="ctrl.goToParent()"/>
+        <h3>
+            {{ctrl.currentGroup.name}}
+        </h3>
+    </div>
+    <ul>
+        <li ng-repeat="item in ctrl.currentGroup.items" ng-click="ctrl.itemClicked(item, $index)">
+            <!-- Contact -->
+            <img src="images/ico_c.png" class="ico" ng-if="item.type == 'CONTACT'"/>
+            <span class="name" ng-if="item.type == 'CONTACT'">{{item.firstName}} {{item.lastName}}</span>
+
+            <!-- Group -->
+            <img src="images/ico_f.png" class="ico" ng-if="item.type == 'GROUP'"/>
+            <span class="name" ng-if="item.type == 'GROUP'">{{item.name}}</span>
+            <span class="edit" ng-if="item.type == 'GROUP'" ng-click="ctrl.editGroupClicked(item, $index)">
+                <img src="images/edit_ico.png" class="ic" title="click to edit" />
+            </span>
+            <span class="del" ng-if="item.type == 'GROUP'" ng-click="ctrl.deleteGroupClicked(item, $index)">
+                <img src="images/del_ico.png" class="ic" title="click to delete" />
+            </span>
+        </li>
+    </ul>
+</div>

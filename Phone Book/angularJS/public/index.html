@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Phone Book</title>
+
+    <link rel="stylesheet" href="themes/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="themes/style.css" type="text/css">
+</head>
+
+<body>
+<div id="wrp" ng-controller="PhonebookCtrl as ctrl">
+    <div id="phoneBookWrp" class="container">
+
+        <!-- Header -->
+        <div id="headerWrp">
+            <h1 class="title">
+                Phone Book
+            </h1>
+        </div>
+
+        <!-- Menu View -->
+        <nav-bar></nav-bar>
+
+        <!-- Group Explorer View -->
+        <item-explorer ng-show="ctrl.isPanelSet(0)"></item-explorer>
+
+        <!-- Add Contact View -->
+        <add-contact ng-show="ctrl.isPanelSet(1)"></add-contact>
+
+        <!-- Add Group View -->
+        <add-group ng-show="ctrl.isPanelSet(2)"></add-group>
+
+        <!-- Group Explorer View -->
+        <founded-item-explorer ng-show="ctrl.isPanelSet(3)"></founded-item-explorer>
+
+        <!-- Footer -->
+        <div id="footerWrp">
+            <div class="title">
+                All rights reserved to the greatest phone book corporation ever.
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modal -->
+    <modal-view ng-show="ctrl.showModel"></modal-view>
+
+</div>
+
+<script src="js/lib/jquery.js"></script>
+<script src="js/lib/bootstrap.js"></script>
+<script src="js/lib/angular.js"></script>
+
+<script src="js/app.js"></script>
+
+<script src="js/ctrl/PromptCtrl.js"></script>
+<script src="js/ctrl/PhonebookCtrl.js"></script>
+
+<script src="js/serivce/Contact.js"></script>
+<script src="js/serivce/Group.js"></script>
+<script src="js/serivce/dataService.js"></script>
+
+<script src="js/directive/itemExplorer.directive.js"></script>
+<script src="js/directive/addContact.directive.js"></script>
+<script src="js/directive/addGroup.directive.js"></script>
+<script src="js/directive/foundedItemExplorer.directive.js"></script>
+<script src="js/directive/modalView.directive.js"></script>
+<script src="js/directive/navBar.directive.js"></script>
+
+
+<script src="js/factory/PhonebookFactory.js"></script>
+
+</body>
+</html>
+

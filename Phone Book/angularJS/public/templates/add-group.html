@@ -1,0 +1,17 @@
+<div id="addGroup" name="panelWrp">
+    <h3 class="subTitle marginBottom30">
+        Group
+    </h3>
+    <form name="form">
+        <div class="inpWrp">
+            <input ng-model="ctrl.name" class="inputText" placeholder="Enter group name" required type="text" required/>
+            <input ng-model="ctrl.groupId" type="hidden">
+        </div>
+
+        <div class="btnWrp">
+            <button ng-if="!ctrl.updateMode" ng-click="ctrl.addGroupClicked()" class="btn">Submit</button>
+            <button ng-if="ctrl.updateMode" ng-click="ctrl.updateGroupClicked()" class="btn">Update</button>
+            <button ng-click="ctrl.goHome()" class="btn">Cancel</button>
+        </div>
+    </form>
+</div>

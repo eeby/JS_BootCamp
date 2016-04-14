@@ -1,0 +1,14 @@
+<nav class="navbar navbar-light bg-faded" style="background-color: #e3f2fd;">
+    <ul class="nav navbar-nav float-right">
+        <li class="nav-item border-left whiteBorder">
+            <a class="nav-link Add-Contact" id="btnAddContact" href="#" ng-click="ctrl.addItemClicked(1)">+ Add Contact</a>
+        </li>
+        <li class="nav-item border-left whiteBorder">
+            <a class="nav-link Add-Group" id="btnAddGroup" href="#" ng-click="ctrl.addItemClicked(2)">+ Add Group</a>
+        </li>
+    </ul>
+    <form class="form-inline pull-xs-right">
+        <input class="form-control" ng-model="ctrl.search" type="text" placeholder="Search">
+        <button class="btn btn-success-outline" ng-click="ctrl.searchClicked()" type="submit">Search</button>
+    </form>
+</nav>

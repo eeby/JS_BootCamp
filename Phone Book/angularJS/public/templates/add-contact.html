@@ -1,0 +1,30 @@
+<div id="addContact" name="panelWrp">
+    <h3 class="subTitle marginBottom30">
+        Contact
+    </h3>
+    <form name="form">
+        <div class="inpWrp">
+            <input ng-model="ctrl.firstName" class="inputText" placeholder="Enter first name" required type="text" required />
+            <input type="hidden" ng-model="ctrl.contact">
+        </div>
+
+        <div class="inpWrp">
+            <input ng-model="ctrl.lastName" class="inputText" placeholder="Enter last name" required type="text" required />
+        </div>
+
+        <div class="inpPhonesWrp marginBottom30">
+            <div id="phonesWrp">
+                <input ng-model="ctrl.phone" class="inputText" name="textPhone" placeholder="Enter phone" required
+                       type="text" required />
+            </div>
+            <div id="btnAddPhones" ng-click="ctrl.appendInputPhone()" class="btn" alt="Click To add more phones">+</div>
+        </div>
+
+        <div class="btnWrp">
+            <button class="btn" type="submit" ng-if="!ctrl.updateMode" ng-click="ctrl.addContactClicked()">Submit</button>
+            <button class="btn" type="submit" ng-if="ctrl.updateMode" ng-click="ctrl.updateContactClicked()">Update</button>
+            <button class="btn" ng-if="ctrl.updateMode" ng-click="ctrl.deleteContactClicked()">Delete</button>
+            <button class="btn" ng-click="ctrl.goHome()">Cancel</button>
+        </div>
+    </form>
+</div>

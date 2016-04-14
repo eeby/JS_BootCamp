@@ -1,0 +1,235 @@
+body, div, span {
+    font-family: Arial;
+    margin: 0px;
+    padding: 0px;
+    color: #1b6d85;
+}
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+
+.marginBottom30 {
+    margin-bottom: 20px;
+}
+
+.marginBottom20 {
+    margin-bottom: 20px;
+}
+
+.marginBottom10 {
+    margin-bottom: 10px;
+}
+
+.marginBottom5 {
+    margin-bottom: 5px;
+}
+
+.border-left.whiteBorder {
+    border-color: white;
+}
+
+.border-left {
+    border-left: 1px solid;
+}
+
+.float-right {
+    float: right;
+}
+
+#wrp {
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin-top: 40px;
+    box-sizing: border-box;
+}
+
+#wrp .container {
+    position: relative;
+    width: 450px;
+    height: auto;
+    border: 1px solid gray;
+    border-radius: 4px;
+    box-shadow: 0px 0px 24px 6px gray;
+    box-sizing: border-box;
+    height: 500px;
+}
+
+#wrp #phoneBookWrp {
+    position: relative;
+    margin: 10px auto
+}
+
+#wrp #headerWrp {
+    position: relative;
+    width: 100%;
+    height: 75px;
+    border-bottom: 1px solid #EFE9E9;
+}
+
+#wrp #headerWrp .title {
+    position: absolute;
+    top: 4px;
+    left: 0px;
+}
+
+#wrp #footerWrp {
+    position: relative;
+    bottom: 0px;
+    width: 100%;
+    height: 50px;
+    border-top: 1px solid #EFE9E9;
+}
+
+#wrp #footerWrp .title {
+    position: absolute;
+    top: 8px;
+    left: 0px;
+}
+
+#wrp #directoryTree {
+    position: relative;
+    width: 100%;
+    height: 290px;
+}
+
+#wrp #directoryTree h3 {
+    display: inline;
+}
+
+#wrp #directoryTree .backBtn {
+    width: 20px;
+    height: 20px;
+    margin-right: 7px;
+    margin-bottom: 11px;
+    cursor: pointer;
+}
+
+#wrp #directoryTree .del {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: red;
+}
+
+#wrp #directoryTree .edit {
+    position: absolute;
+    top: 0px;
+    right: 20px;
+    color: darkblue;
+}
+
+#wrp #directoryTree .ic{
+    width:16px;
+    height: 16px;
+}
+
+#wrp [name="displayPanel"] div {
+    margin: 4px 0px;
+}
+
+#wrp [name="displayPanel"] [type="button"] {
+    width: 60px;
+    height: 30px;
+    float: right;
+    margin-bottom: 20px;
+}
+
+#wrp #directoryTree li img {
+    width: 60px;
+    height: 60px;
+    margin: 7px;
+}
+
+#wrp #directoryTree ul {
+    padding: 0px;
+}
+
+#wrp #directoryTree ul li {
+    position: relative;
+    display: inline-block;
+    width: 203px;
+    height: 80px;
+    border: 1px solid lightgrey;
+    margin: 3px;
+    border-radius: 4px;
+}
+
+#wrp #directoryTree ul li:hover {
+    cursor: pointer;
+    background-color: #e3f2fd;
+}
+
+#addContact, #addGroup {
+    position: relative;
+    height: 290px;
+}
+
+.inpWrp {
+    position: relative;
+    width: 99%;
+    border-bottom: 1px solid lightblue;
+    margin-bottom: 30px;
+}
+
+.inputText {
+    border: 0px;
+    font-size: 18px;
+    padding: 7px;
+    width: 413px;
+}
+
+#addContact .inpPhonesWrp {
+    position: relative;
+    margin-bottom: 20px;
+    height: 38px;
+}
+
+#addContact .inpPhonesWrp .inputText {
+    float: left;
+    width: 124px;
+    padding: 7px;
+    margin: 3px;
+    border-bottom: 1px solid lightblue;
+}
+
+#addContact .inpPhonesWrp #btnAddPhones {
+    padding: 7px;
+    float: left;
+}
+
+.btnWrp {
+    position: absolute;
+    width: 100%;
+    bottom: 5px;
+}
+
+#addContact .btn, #addGroup .btn {
+    float: right;
+    height: 40px;
+    width: 80px;
+    margin-right: 10px;
+}
+
+.form-inline .form-control {
+    width: 120px;
+}
+
+.nav > li > a {
+    padding: 10px;
+}
+
+.form-inline {
+    padding-top: 4px;
+    margin-left: 4px;
+    box-sizing: border-box;
+}
+
+.navbar{
+    min-height: 43px;
+}
