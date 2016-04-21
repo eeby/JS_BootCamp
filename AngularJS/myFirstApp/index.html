@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular</title>
+</head>
+<body>
+<div ng-controller="HomeCtrl as vm" ng-init="vm.init()">
+
+    <input ng-model="vm.name"/>
+    <input ng-model="vm.age"/>
+
+
+    <div ng-class="hide">
+
+        <span>{{vm.name}}</span> <span ng-if="vm.age < 18">, you are under age</span>
+        <span ng-if="vm.age >= 18">, you may login</span>
+
+    </div>
+</div>
+
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<script src="homeCtrl.js"></script>
+</body>
+</html>

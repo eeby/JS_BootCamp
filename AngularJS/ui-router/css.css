@@ -1,0 +1,14 @@
+li{ line-height: 30px; font-size: 20px}
+li:hover{text-decoration: underline; cursor: pointer;}
+
+/*.divView{position: absolute; top:0px; left: 250px}*/
+
+header{background-color: lightcyan; padding: 20px}
+
+.pink{
+    background-color: lightpink;
+}
+
+.cyan{
+    background-color: lightcyan;
+}

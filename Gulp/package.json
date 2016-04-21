@@ -1,0 +1,20 @@
+ {
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-util": "^3.0.7",
+    "shelljs": "^0.6.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"preinstall": "echo \"install is about to begin...\"",
+	"postinstall": "bower install && gulp bower:copy",
+	"bowercheck": "node bowercheck.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

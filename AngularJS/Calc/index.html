@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Calc</title>
+</head>
+<body>
+
+<div ng-controller="AppCtrl as ctrl">
+
+    <input ng-model="ctrl.num" />
+    <table>
+        <tr>
+            <td ng-click="ctrl.getVal(7)">7</td>
+            <td ng-click="ctrl.getVal(8)">8</td>
+            <td ng-click="ctrl.getVal(9)">9</td>
+            <td ng-click="ctrl.getOperand('+')">+</td>
+        </tr>
+        <tr>
+            <td ng-click="ctrl.getVal(4)">4</td>
+            <td ng-click="ctrl.getVal(5)">5</td>
+            <td ng-click="ctrl.getVal(6)">6</td>
+            <td ng-click="ctrl.getOperand('-')">-</td>
+        </tr>
+        <tr>
+            <td ng-click="ctrl.getVal(1)">1</td>
+            <td ng-click="ctrl.getVal(2)">2</td>
+            <td ng-click="ctrl.getVal(3)">3</td>
+            <td ng-click="ctrl.getSum()">=</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td ng-click="ctrl.getVal(0)">0</td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <input ng-model="ctrl.num1">
+
+    <input ng-model="ctrl.num2">
+
+    <input ng-model="ctrl.opr">
+</div>
+
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<script src="CalcService.js"></script>
+<script src="AppCtrl.js"></script>
+
+<style type="text/css">
+    td{
+        cursor: pointer;
+        font-size: 66px;
+    }
+    input{
+        font-size: 30px;
+        width: 150px;
+    }
+</style>
+</body>
+</html>
+

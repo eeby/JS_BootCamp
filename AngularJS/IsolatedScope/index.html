@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div ng-controller="HomeCtrl as ctrl">
+
+    My grade: <input ng-model="ctrl.grade" min="0" max="100">
+
+    <span>Comment: {{ctrl.comment}}</span>
+
+    <grade-smile the-grade="ctrl.grade" grade-func="ctrl.setComment()"></grade-smile>
+
+</div>
+
+<script src="angular.js"></script>
+<script src="app.js"></script>
+<script src="HomeCtrl.js"></script>
+<script src="GradeDirective.js"></script>
+</body>
+</html>

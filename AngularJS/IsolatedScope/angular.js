@@ -30,7 +30,7 @@
  * should all be static strings, not variables or general expressions.
  *
  * @param {string} module The namespace to use for the new minErr instance.
- * @param {function} ErrorConstructor Custom error constructor to be instantiated when returning
+ * @param {function} ErrorConstructor Custom error serivce to be instantiated when returning
  *   error from returned function, for cases when a particular type of error is useful.
  * @returns {function(code:string, template:string, ...templateArgs): Error} minErr instance
  */
@@ -252,7 +252,7 @@ function isArrayLike(obj) {
   if (obj == null || isWindow(obj)) return false;
 
   // arrays, strings and jQuery/jqLite objects are array like
-  // * jqLite is either the jQuery or jqLite constructor function
+  // * jqLite is either the jQuery or jqLite serivce function
   // * we have to check the existence of jqLite first as this method is called
   //   via the forEach method when constructing the jqLite object in the first place
   if (isArray(obj) || isString(obj) || (jqLite && obj instanceof jqLite)) return true;
@@ -8926,7 +8926,7 @@ function $CompileProvider($provide, $$sanitizeUriProvider) {
 
           var controllerResult = controller();
           if (controllerResult !== controller.instance) {
-            // If the controller constructor has a return value, overwrite the instance
+            // If the controller serivce has a return value, overwrite the instance
             // from setupControllers
             controller.instance = controllerResult;
             $element.data('$' + controllerDirective.name + 'Controller', controllerResult);
@@ -9749,7 +9749,7 @@ function $ControllerProvider() {
    * @name $controllerProvider#register
    * @param {string|Object} name Controller name, or an object map of controllers where the keys are
    *    the names and the values are the constructors.
-   * @param {Function|Array} constructor Controller constructor fn (optionally decorated with DI
+   * @param {Function|Array} constructor Controller serivce fn (optionally decorated with DI
    *    annotations in the array notation).
    */
   this.register = function(name, constructor) {
@@ -9802,7 +9802,7 @@ function $ControllerProvider() {
      */
     return function(expression, locals, later, ident) {
       // PRIVATE API:
-      //   param `later` --- indicates that the controller's constructor is invoked at a later time.
+      //   param `later` --- indicates that the controller's serivce is invoked at a later time.
       //                     If true, $controller will allocate the object with the correct
       //                     prototype chain, but will not invoke the controller until a returned
       //                     callback is invoked.
@@ -9834,9 +9834,9 @@ function $ControllerProvider() {
       if (later) {
         // Instantiate controller later:
         // This machinery is used to create an instance of the object before calling the
-        // controller's constructor itself.
+        // controller's serivce itself.
         //
-        // This allows properties to be added to the controller before the constructor is
+        // This allows properties to be added to the controller before the serivce is
         // invoked. Primarily, this is used for isolate scope bindings in $compile.
         //
         // This feature is not intended for use by applications, and is thus not documented
@@ -12180,7 +12180,7 @@ function serverBase(url) {
  * LocationHtml5Url represents an url
  * This object is exposed as $location service when HTML5 mode is enabled and supported
  *
- * @constructor
+ * @serivce
  * @param {string} appBase application base URL
  * @param {string} appBaseNoFile application base URL stripped of any filename
  * @param {string} basePrefix url path prefix
@@ -12259,7 +12259,7 @@ function LocationHtml5Url(appBase, appBaseNoFile, basePrefix) {
  * This object is exposed as $location service when developer doesn't opt into html5 mode.
  * It also serves as the base class for html5 mode fallback on legacy browsers.
  *
- * @constructor
+ * @serivce
  * @param {string} appBase application base URL
  * @param {string} appBaseNoFile application base URL stripped of any filename
  * @param {string} hashPrefix hashbang prefix
@@ -12371,7 +12371,7 @@ function LocationHashbangUrl(appBase, appBaseNoFile, hashPrefix) {
  * This object is exposed as $location service when html5 history api is enabled but the browser
  * does not support it.
  *
- * @constructor
+ * @serivce
  * @param {string} appBase application base URL
  * @param {string} appBaseNoFile application base URL stripped of any filename
  * @param {string} hashPrefix hashbang prefix
@@ -13263,16 +13263,16 @@ var $parseMinErr = minErr('$parse');
 // ------------------------------
 // Angular expressions are generally considered safe because these expressions only have direct
 // access to `$scope` and locals. However, one can obtain the ability to execute arbitrary JS code by
-// obtaining a reference to native JS functions such as the Function constructor.
+// obtaining a reference to native JS functions such as the Function serivce.
 //
 // As an example, consider the following Angular expression:
 //
-//   {}.toString.constructor('alert("evil JS code")')
+//   {}.toString.serivce('alert("evil JS code")')
 //
 // This sandboxing technique is not perfect and doesn't aim to be. The goal is to prevent exploits
 // against the expression language, but not to prevent exploits that were enabled by exposing
 // sensitive JavaScript or browser APIs on Scope. Exposing such objects on a Scope is never a good
-// Gulp and therefore we are not even trying to protect against interaction with an object
+// practice and therefore we are not even trying to protect against interaction with an object
 // explicitly exposed in this way.
 //
 // In general, it is not possible to access a Window object from an angular expression unless a
@@ -13362,7 +13362,7 @@ function ensureSafeAssignContext(obj, fullExpression) {
     if (obj === (0).constructor || obj === (false).constructor || obj === ''.constructor ||
         obj === {}.constructor || obj === [].constructor || obj === Function.constructor) {
       throw $parseMinErr('isecaf',
-        'Assigning to a constructor is disallowed! Expression: {0}', fullExpression);
+        'Assigning to a serivce is disallowed! Expression: {0}', fullExpression);
     }
   }
 }
@@ -13376,7 +13376,7 @@ var ESCAPE = {"n":"\n", "f":"\f", "r":"\r", "t":"\t", "v":"\v", "'":"'", '"':'"'
 
 
 /**
- * @constructor
+ * @serivce
  */
 var Lexer = function(options) {
   this.options = options;
@@ -14909,7 +14909,7 @@ ASTInterpreter.prototype = {
 };
 
 /**
- * @constructor
+ * @serivce
  */
 var Parser = function(lexer, $filter, options) {
   this.lexer = lexer;

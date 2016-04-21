@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        body > div {
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+    </style>
+</head>
+<body ng-app="myRout" ng-model="myHome" ng-init="myHome = true">
+    <div ng-controller="HomeCtrl" data-url="/" ng-if="myHome" >
+        <h1>
+            Home
+        </h1>
+        <a ng-href="/about" ng-click="$event.preventDefault();redirectToAbout()">About</a>
+    </div>
+
+    <div ng-controller="AboutCtrl" data-url="/about" ng-if="!myHome">
+        <h1>
+            About
+        </h1>
+        <a href="/" ng-click="redirectToHome()">Home</a>
+    </div>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+
+    <script>
+        var app = angular.module("myRout", []);
+
+        app.controller('HomeCtrl', function($attrs, $element, $scope) {
+            $element.addClass('active');
+
+            $scope.redirectToAbout = function(){
+
+                $element.removeClass('active');
+                window.history.pushState({}, null, '/about');
+            }
+        });
+
+        app.controller('AboutCtrl', function($attrs, $element, $scope) {
+            $element.addClass('active');
+
+            $scope.redirectToHome = function(){
+
+                $element.removeClass('active');
+                window.history.pushState({}, null, '/');
+            }
+        });
+
+    </script>
+</body>
+</html>

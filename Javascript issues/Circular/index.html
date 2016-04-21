@@ -7,13 +7,15 @@
 <body>
     <script>
 
-        var obj = {
-            id:1,
-            name: "eli",
-            items: ''
-        }
+
 
         (function() {
+            var obj = {
+                id:1,
+                name: "eli",
+                items: ''
+            }
+
             obj.items = obj;
             var str = JSON.stringify(obj);
         }());

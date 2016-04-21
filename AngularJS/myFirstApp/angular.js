@@ -13272,7 +13272,7 @@ var $parseMinErr = minErr('$parse');
 // This sandboxing technique is not perfect and doesn't aim to be. The goal is to prevent exploits
 // against the expression language, but not to prevent exploits that were enabled by exposing
 // sensitive JavaScript or browser APIs on Scope. Exposing such objects on a Scope is never a good
-// Gulp and therefore we are not even trying to protect against interaction with an object
+// practice and therefore we are not even trying to protect against interaction with an object
 // explicitly exposed in this way.
 //
 // In general, it is not possible to access a Window object from an angular expression unless a

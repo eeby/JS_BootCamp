@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="css.css" rel="stylesheet">
+</head>
+<body ng-controller="Main as ctrl">
+
+<div>
+
+    <header class="ng-class: ctrl.myClass">
+        <h1>States</h1>
+
+        <ul>
+            <li ui-sref="stateFirst">
+                First State
+            </li>
+            <li ui-sref="stateSecond">
+                Second State
+            </li>
+        </ul>
+    </header>
+
+    <div class="divView">
+        <div ui-view></div>
+    </div>
+
+</div>
+
+
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<script src="app.module.js"></script>
+<script src="app.config.js"></script>
+
+<script src="color.provider.js"></script>
+
+<script src="main.controler.js"></script>
+
+
+</body>
+</html>
