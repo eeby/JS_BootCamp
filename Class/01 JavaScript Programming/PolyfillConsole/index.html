@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    if (typeof console2 == "undefined") {
+        window.console2 = {};
+
+        window.console2.log = function () {
+            alert('console.log');
+        }
+
+        console2.log();
+    }
+    else {
+        console.log("abc");
+    }
+</script>
+</body>
+</html>

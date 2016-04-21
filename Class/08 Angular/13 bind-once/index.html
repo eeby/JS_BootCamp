@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="HomeCtrl">
+        <ul>
+            <li ng-repeat="contact in ::contacts track by $index">
+                <span>{{::contact.name}}</span>
+            </li>
+        </ul>
+
+        <div>
+            <button ng-click="change()">Change</button>
+        </div>
+    </div>
+
+    <div class="placeholder"></div>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="HomeCtrl.js"></script>
+</body>
+</html>

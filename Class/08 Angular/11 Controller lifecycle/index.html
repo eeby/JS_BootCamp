@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        [ng-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div ng-controller="ToolbarCtrl">
+        <button ng-click="toggle()">Toggle</button>
+    </div>
+
+    <div ng-controller="HomeCtrl" ng-if="showCtrl">
+        <h1>Home</h1>
+    </div>
+
+    <div class="placeholder"></div>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="EventDispatcherService.js"></script>
+    <script src="ToolbarCtrl.js"></script>
+    <script src="HomeCtrl.js"></script>
+</body>
+</html>

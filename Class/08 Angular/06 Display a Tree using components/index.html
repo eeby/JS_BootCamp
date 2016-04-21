@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="HomeCtrl as ctrl">
+        <button ng-click="ctrl.change()">Change</button>
+
+        <tree nodes="ctrl.nodes"></tree>
+    </div>
+
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="HomeCtrl.js"></script>
+    <script src="TreeCtrl.js"></script>
+</body>
+</html>

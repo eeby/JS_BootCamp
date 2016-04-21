@@ -1,0 +1,11 @@
+<div ng-controller="TreeCtrl">
+    <ul>
+        <li ng-repeat="node in node.nodes">
+            <span>{{node.name}}</span>
+
+            <div ng-if="!!node.nodes">
+                <div ng-include="'tree.html'" ng-if="!!node.nodes"></div>
+            </div>
+        </li>
+    </ul>
+</div>

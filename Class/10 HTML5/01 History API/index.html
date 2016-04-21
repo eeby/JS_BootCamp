@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <button>Change URL</button>
+
+    <div id="about">
+
+    </div>
+
+    <a href="#about">Goto About</a>
+
+    <script src="jquery.js"></script>
+    <script>
+        $("button").click(function() {
+            //window.location.assign("xxx");
+            //window.location.hash = "/about";
+
+            window.history.pushState({}, null, "/xxx");
+        });
+    </script>
+</body>
+</html>

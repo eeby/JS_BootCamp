@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div ng-controller="AppCtrl as ctrl">
+        <input ng-model="ctrl.num1" />
+        +
+        <input ng-model="ctrl.num2" />
+        =
+        <span>{{ctrl.result}}</span>
+
+        <p>
+            <button ng-click="ctrl.calc()">Calc</button>
+        </p>
+    </div>
+
+    <div ng-controller="AppCtrl as ctrl">
+        <input ng-model="ctrl.num1" />
+        +
+        <input ng-model="ctrl.num2" />
+        =
+        <span>{{ctrl.result}}</span>
+
+        <p>
+            <button ng-click="ctrl.calc()">Calc</button>
+        </p>
+    </div>
+
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="CalcService.js"></script>
+    <script src="AppCtrl.js"></script>
+</body>
+</html>

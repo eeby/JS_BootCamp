@@ -1,0 +1,7 @@
+<ul>
+    <li ng-repeat="node in nodes">
+        <span>{{node.name}}</span>
+
+        <tree ng-if="!!node.nodes" nodes="node.nodes"></tree>
+    </li>
+</ul>

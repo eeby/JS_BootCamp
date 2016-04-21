@@ -1,0 +1,4 @@
+  [
+  {"id": 1, "name": "Ori", "parentId": -1},
+  {"id": 2, "name": "Roni", "parentId": 1}
+]

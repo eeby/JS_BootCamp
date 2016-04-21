@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <script>
+        var root = {
+            id: 1,
+            name: "~",
+            items: [],
+            parent: null,
+        };
+
+        var friends = {
+            id: 2,
+            name: "Friends",
+            items: [],
+            parent: root,
+        };
+        root.items.push(friends);
+
+        var bestFriends = {
+            id: 3,
+            name: "Best Friends",
+            items: [],
+            parent: friends,
+        };
+        friends.items.push(bestFriends);
+
+        var ori = {
+            id: 4,
+            name: "Ori",
+            parent: root,
+        };
+        root.items.push(ori);
+
+        var currentGroup = bestFriends;
+
+
+
+        var res = JSON.stringify(root);
+        console.log(res);
+    </script>
+</body>
+</html>

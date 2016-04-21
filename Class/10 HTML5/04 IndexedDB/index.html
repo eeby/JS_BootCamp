@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var db = null;
+
+        var request = indexedDB.open("MyDB", 3);
+
+        request.addEventListener("success", function(e) {
+            console.log("SUCCESS: %O", e);
+
+            db = e.target.result;
+
+            onDbReady();
+        });
+
+        request.addEventListener("upgradeneeded", function(e) {
+            console.log("upgradeneeded: %O", e);
+
+            db = e.target.result;
+
+            db.createObjectStore("contacts", {keyPath: "id", autoIncrement: true});
+        });
+
+        function onDbReady() {
+            var tran = db.transaction(["contacts"], "readwrite");
+            tran.oncomplete = function() {
+                console.log("TRAN complete");
+            }
+
+            tran.onerror = function() {
+                console.log("TRAN error");
+            }
+
+            var store = tran.objectStore("contacts");
+            var contact = {name: "Ori", email: "dsddd"};
+            var request = store.add(contact);
+
+            request.onsuccess = function(e) {
+                console.log("ADD success: %O", e.target);
+                console.log("ADD success: %O", e.target.result);
+                console.log("CONTACT: %O", contact);
+            }
+
+            request.onerror = function(e) {
+                console.log("ADD error: %O", e.target.result);
+            }
+        }
+    </script>
+</body>
+</html>

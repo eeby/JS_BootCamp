@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        input {
+            outline: none;
+        }
+
+        input.ng-invalid.ng-touched {
+            border: 1px solid red;
+        }
+
+        .validaton-error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <!--<form>-->
+        <!--<input required />-->
+
+        <!--<input type="submit" value="Save" />-->
+    <!--</form>-->
+
+    <div ng-controller="HomeCtrl">
+        <form name="form" novalidate>
+            <div>
+                <input required ng-model="name" name="name" />
+                <span ng-if="form.name.$invalid && (form.$submitted || form.name.$touched)" class="validaton-error">Please specify a name</span>
+            </div>
+
+            <div>
+                <input type="email" ng-model="email" name="email" />
+                <span ng-if="form.email.$invalid && (form.$submitted || form.email.$touched)" class="validaton-error">Please specify an email</span>
+            </div>
+
+            <div>
+                <button ng-click="save()">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="placeholder"></div>
+
+    <script src="jquery.js"></script>
+    <script src="angular.js"></script>
+    <script src="app.js"></script>
+    <script src="HomeCtrl.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <script>
+        var obj1 = {
+            id: 1,
+            name: "Ori",
+            dump: function() {
+                console.log(this.id + ", " + this.name);
+            }
+        };
+
+        var obj2 = Object.create(obj1);
+
+        console.log(typeof obj1 == obj2);
+    </script>
+</body>
+</html>

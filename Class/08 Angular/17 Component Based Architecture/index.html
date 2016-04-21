@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MyApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <app></app>
+
+    <script src="lib/system.src.js"></script>
+    <script>
+        System.defaultJSExtensions = true;
+
+        System.config({
+            map: {
+                "text": "lib/system.text.js",
+                "css": "lib/system.css.js",
+                "angular": "lib/angular.js"
+            },
+        });
+
+        System.import("main");
+    </script>
+</body>
+</html>
